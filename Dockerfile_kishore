@@ -1,0 +1,17 @@
+FROM ubuntu:16.04
+LABEL MAINTAINER "kishore"
+
+RUN apt-get update -y
+RUN apt-get install apache2 -y
+RUN apt-get install wget -y
+RUN apt-get install unzip -y
+
+WORKDIR /temp
+
+RUN wget https://github.com/kishorekumarsivvala/my-app/archive/master.zip
+RUN unzip master.zip
+RUN cp -r my-app-master/* /var/www/html
+
+EXPOSE 80
+
+CMD ["apachectl","-D","FOREGROUND"]
