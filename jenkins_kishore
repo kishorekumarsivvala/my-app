@@ -1,24 +1,25 @@
 node{
-   stage('SCM Checkout'){
-     git 'https://github.com/kishorekumarsivvala/my-app'
+	stage('SCM Checkout'){
+     		git 'https://github.com/kishorekumarsivvala/my-app'
    }
-   stage('comple and build'){
-       def mvnHome = tool name: 'maven3', type: 'maven'
-        sh"${mvnHome}/bin/mvn package"   
+	stage('comple and build'){
+       		def mvnHome = tool name: 'maven3', type: 'maven'
+        	sh"${mvnHome}/bin/mvn package"   
    }
-   stage('deploye to tomcat'){
-       sshagent(['deploye_to_tomcat']) {
-    // some block
-       sh 'scp -o StrictHostKeyChecking=no target/*war ec2-user@35.154.255.146:/opt/tomcat8/webapps/'
+	stage('deploye to tomcat'){
+       		sshagent(['deploye_to_tomcat']) {
+    		// some block
+       		sh 'scp -o StrictHostKeyChecking=no target/*war ec2-user@35.154.255.146:/opt/tomcat8/webapps/'
 }
 }
-    stage('Slack Notification'){
-	slackSend baseUrl: 'https://hooks.slack.com/services/', 
-	channel: '#jenkins_slack',	
-	color: 'good', 	
-	message: 'welcome to jenkins',
-	teamDomain: 'learn_python_hard', 
-	token: 'T7ERS6UM8/BCNN72HMJ/oCp4pZ2WrGtY6A3vNPxXpzS3'
+	stage('Slack Notification'){
+		slackSend baseUrl: 'https://hooks.slack.com/services/', 
+		channel: '#jenkins_slack',	
+		color: 'good', 	
+		message: 'welcome to jenkins',
+		teamDomain: 'learn_python_hard', 
+		token: 'T7ERS6UM8/BCNN72HMJ/oCp4pZ2WrGtY6A3vNPxXpzS3'
 
 }
+	
 }
