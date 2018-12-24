@@ -1,6 +1,12 @@
+
+properties([parameters([choice(choices: 'master\nfeature-1\nfeature-2', description: 'select one branch', name: 'branch')])])
+
+
 node{
 	stage('SCM Checkout'){
-     		git 'https://github.com/kishorekumarsivvala/my-app'
+		echo "pulling chengs from branch ${params.branch}"
+     		git url:'https://github.com/kishorekumarsivvala/my-app',branch:"${params.branch}"
+
    		}
 	stage('comple and build'){
        		def mvnHome = tool name: 'maven3', type: 'maven'
