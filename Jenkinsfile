@@ -1,4 +1,5 @@
 node{
+
    stage('SCM Checkout'){
      git 'https://github.com/javahometech/my-app'
    }
@@ -6,7 +7,7 @@ node{
       // Get maven home path
       def mvnHome =  tool name: 'maven3', type: 'maven'   
       sh "${mvnHome}/bin/mvn package"
-   }
-   }
+   } 
 
+}
 
